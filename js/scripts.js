@@ -3,16 +3,16 @@
 страницу, т.е. не отталкиваться от open блоков, а проверять все
 */
 skillsDict = {
-    'Backend': ['SQL', 'Kafka', 'RabbitMQ', 'Docker'],
-    'Frontend': ['Webpack', 'HTML', 'CSS'],
-    'FullStack': ['SQL', 'Kafka', 'Docker', 'Webpack', 'HTML', 'CSS'],
-    'Android': ['Jetpack Compose',],
-    'iOS': ['RX Swift'],
-    'Infosecurity': ['SQL Injection'],
-    'QA Automation': ['Selenium', 'Postman'],
-    'QA Manual': ['Postman'],
-    'Unity': ['Unity'],
-    'Unreal Engine': ['Unreal Engine'],
+    'Backend': ['SQL', 'Kafka', 'RabbitMQ', 'Docker', 'Git'],
+    'Frontend': ['Webpack', 'HTML', 'CSS', 'Git'],
+    'FullStack': ['SQL', 'Kafka', 'Docker', 'Webpack', 'HTML', 'CSS', 'Git'],
+    'Android': ['Jetpack Compose', 'Git'],
+    'iOS': ['RX Swift', 'Git'],
+    'Infosecurity': ['SQL Injection', 'Git'],
+    'QA Automation': ['Selenium', 'Postman', 'Git'],
+    'QA Manual': ['Postman', 'Git'],
+    'Unity': ['Unity', 'Git'],
+    'Unreal Engine': ['Unreal Engine', 'Git'],
 }
 
 function start() {
