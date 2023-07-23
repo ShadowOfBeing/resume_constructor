@@ -99,6 +99,11 @@ function addInfo() {
     doc.setFont('_TimesNewRoman');
     doc.setFontSize(9)
     doc.text(skills, 10, 9.5 * row)
+    /* предыдущие места работы */
+    row += 1
+    doc.setFont('_TimesNewRomanBold');
+    doc.setFontSize(13)
+    doc.text(`Опыт работы: `, 10, 10 * row)
 
     var pdfData = doc.output('datauristring');
     var iframe = `<iframe id="pdf-view" width='100%' height='${height}px' src='${pdfData}'></iframe>`;
