@@ -18,10 +18,17 @@
                 </div>
                 <div class="accumulationOptionsWrapper">
                     <div class="option-title">Имя</div>
-                    <input class="option" id="salary" type="text" size="40">
+                    <input class="option" id="first-name" type="text" size="40" value="Иван">
 
                     <div class="option-title">Фамилия</div>
-                    <input class="option" id="rise-period" type="text" size="40">
+                    <input class="option" id="last-name" type="text" size="40" value="Иванов">
+
+                    <div class="option-title">Грейд</div>
+                    <select class="option" id="grade" name="grade">
+                        <option value="Middle">Middle</option>
+                        <option value="Senior">Senior</option>
+                        <option value="TeamLead">TeamLead</option>
+                    </select>
 
                     <div class="option-title">Направление/сфера</div>
                     <select class="option" id="programming-area" name="my-select">
@@ -37,13 +44,6 @@
                         <option value="Unreal Engine">Unreal Engine</option>
                     </select>
 
-                    <div class="option-title">Грейд</div>
-                    <select class="option" id="grade" name="grade">
-                        <option value="Middle">Middle</option>
-                        <option value="Senior">Senior</option>
-                        <option value="TeamLead">TeamLead</option>
-                    </select>
-
                     <div class="option-title">Язык программирования</div>
                     <select class="option" id="programming-language" name="programming-language">
                         <option value="Python">Python</option>
@@ -56,6 +56,9 @@
                         <option value="Ruby">Ruby</option>
                         <option value="Rust">Rust</option>
                     </select>
+
+                    <div class="option-title">Фреймворк</div>
+                    <input class="option" id="framework" value="Django">
                 </div>
             </div>
             <div id="contact-info">
@@ -65,13 +68,13 @@
                 </div>
                 <div class="mortgageOptionsWrapper">
                     <div class="option-title">Электронная почта</div>
-                    <input class="option" id="apartment-price" type="text" size="40">
-
-                    <div class="option-title">Телеграм</div>
-                    <input class="option" id="mortgage-down-payment" type="text" size="40">
+                    <input class="option" id="email" type="text" size="40" value="abobus@mail.ru">
 
                     <div class="option-title">Телефон</div>
-                    <input class="option" id="mortgage-period" type="text" size="40">
+                    <input class="option" id="phone" type="text" size="40" value="+79389572850">
+
+                    <div class="option-title">Телеграм</div>
+                    <input class="option" id="telegram" type="text" size="40" value="t.me/abobus_developer">
                 </div>
             </div>
             <div id="about">
@@ -85,6 +88,29 @@
 
                     <div class="option-title">Портфолио</div>
                     <input class="option" id="portfolio" type="text" size="40">
+
+                    <div class="option-title">Знание языков</div>
+                    <select class="option" id="languages" name="work-format" multiple>
+                        <option value="language-1">английский</option>
+                        <option value="language-2">немецкий</option>
+                        <option value="language-3">французский</option>
+                        <option value="language-4">итальянский</option>
+                        <option value="language-5">испанский</option>
+                        <option value="language-6">китайский</option>
+                        <option value="language-7">корейский</option>
+                        <option value="language-8">японский</option>
+                    </select>
+
+                    <div class="option-title">Образование</div>
+                    <input class="option" id="education" type="text" size="40">
+
+                    <div class="option-title">Предпочитаемый формат работы</div>
+                    <select class="option" id="work-format" name="work-format">
+                        <option value="remote-in">удалёнка по РФ</option>
+                        <option value="remote-out">удалёнка за пределами РФ</option>
+                        <option value="office">офис</option>
+                        <option value="hybrid">гибрид</option>
+                    </select>
                 </div>
             </div>
             <div id="company">
@@ -102,8 +128,8 @@
                     <div class="option-title">Третья компания</div>
                     <input class="option" id="company-3" type="text" size="40">
 
-                    <div class="option-title">Общий стаж</div>
-                    <input class="option" id="experience" type="text" size="40">
+                    <div class="option-title">Реальный стаж по выбранному направлению</div>
+                    <input class="option" id="experience" type="text" size="40" value="1.5">
                 </div>
             </div>
             <button class="calc-btn" onclick="addInfo()">Добавить</button>
@@ -117,7 +143,7 @@
         </div>
     </div>
     <script>
-
+        start()
     </script>
 </body>
 </html>

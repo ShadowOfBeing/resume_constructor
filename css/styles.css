@@ -10,6 +10,7 @@
 .rubrics-menu {
     width: 27vw;
     margin-left: 5%;
+    padding-top: 5vh;
 }
 
 .content-box {
@@ -21,7 +22,6 @@
     height: 95vh;
     width: var(--resume-width);
     overflow: auto;
-    border: 2px solid red;
     padding: 0 10px 10px;
     font-size: 2vw;
     margin-left: 10%;
@@ -276,20 +276,4 @@ a {
     margin: 10px auto auto auto;
     display: flex;
     flex-direction: column;
-}
-
-.row {
-    position: relative;
-    margin: 8px calc(var(--resume-width) * 0.156);
-    font-size: 1.2vh;
-    border-bottom: 1px solid grey;
-}
-
-.row-number {
-    position: absolute;
-    left: calc(var(--resume-width) * -0.156);
-}
-
-#my-select {
-
 }

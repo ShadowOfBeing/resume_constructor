@@ -1,50 +1,104 @@
-var row = 1
+/*
+сделать каждый раз создание новой страницы, каждый раз проверять какие блоки заполнены и по новой добавлять всю инфу на
+страницу, т.е. не отталкиваться от open блоков, а проверять все
+*/
+skillsDict = {
+    'Backend': ['SQL', 'Kafka', 'RabbitMQ', 'Docker'],
+    'Frontend': ['Webpack', 'HTML', 'CSS'],
+    'FullStack': ['SQL', 'Kafka', 'Docker', 'Webpack', 'HTML', 'CSS'],
+    'Android': ['Jetpack Compose',],
+    'iOS': ['RX Swift'],
+    'Infosecurity': ['SQL Injection'],
+    'QA Automation': ['Selenium', 'Postman'],
+    'QA Manual': ['Postman'],
+    'Unity': ['Unity'],
+    'Unreal Engine': ['Unreal Engine'],
+}
+
+function start() {
+    let pdfViewer = document.getElementById('pdf-viewer');
+    const height = window.innerHeight * 0.93;
+    const { jsPDF } = window.jspdf;
+    // Default export is a4 paper, portrait, using millimeters for units
+    var doc = new jsPDF();
+    var pdfData = doc.output('datauristring');
+    var iframe = `<iframe id="pdf-view" width='100%' height='${height}px' src='${pdfData}'></iframe>`;
+    pdfViewer.innerHTML = iframe;
+}
 
 function addInfo() {
-//    var resume = document.getElementById('mortgage-table')
-//    var rows = ''
-//    for (var i = 1; i < 54; i++) {
-//        rows += `<div class="row"><div class="row-number">${i}</div></div>`
-//    }
-//    resume.innerHTML = rows
-    const { jsPDF } = window.jspdf;
-
+    var row = 1
     // Получение элемента контейнера для отображения PDF
     let pdfViewer = document.getElementById('pdf-viewer');
     const height = window.innerHeight * 0.93;
-
+    const { jsPDF } = window.jspdf;
     // Default export is a4 paper, portrait, using millimeters for units
-    const doc = new jsPDF();
-    doc.addFont('../fonts/Times.ttf', 'ARIALUNI', 'normal');
-
+    var doc = new jsPDF();
+    doc.addFont('../fonts/times.ttf', '_TimesNewRoman', 'normal');
+    doc.addFont('../fonts/timesbd.ttf', '_TimesNewRomanBold', 'normal');
     // установка шрифта для всего документа
-    doc.setFont('ARIALUNI');
-    doc.setFontSize(10)
+    //doc.setFont('_TimesNewRoman');
+    /* название резюме */
+    var firstName = document.getElementById('first-name').value
+    var lastName = document.getElementById('last-name').value
+    var area = document.getElementById('programming-area').value
+    var lang = document.getElementById('programming-language').value
+    var framework = document.getElementById('framework').value
+    /* контактная информация */
+    var email = document.getElementById('email').value
+    var phone = document.getElementById('phone').value
+    var telegram = document.getElementById('telegram').value
+    /* о себе */
+    var experience = parseFloat(document.getElementById('experience').value)
 
-    var target = document.getElementsByClassName('open')[0]
-    if (target.classList.contains('mortgageOptionsWrapper')) {
-        var email = document.getElementById('apartment-price')
-        var telegram = document.getElementById('mortgage-down-payment')
-        var phone = document.getElementById('mortgage-period')
-        if (email.value) {
-            doc.text(`E-mail: ${email.value}`, 10, 10 * row)
-            row += 1
-        }
-        if (phone.value) {
-            doc.text(`Phone: ${phone.value}`, 10, 10 * row)
-            row += 1
-        }
-        if (telegram.value) {
-            doc.text(`Telegram: ${telegram.value}`, 10, 10 * row)
-            row += 1
-        }
-    } else if (target.classList.contains('accumulationOptionsWrapper')) {
-        var firstName = document.getElementById('salary').value
-        var lastName = document.getElementById('rise-period').value
-        var area = document.getElementById('programming-area').value
-        var lang = document.getElementById('programming-language').value
+    if (firstName && lastName) {
+        row = 1
+        doc.setFont('_TimesNewRomanBold');
+        doc.setFontSize(13)
+
         doc.text(`${lastName} ${firstName}, ${lang} ${area} Developer`, 10, 10 * row)
     }
+    if (email || telegram || phone) {
+        doc.setFont('_TimesNewRoman');
+        doc.setFontSize(9)
+
+        row = 3
+        if (email) {
+            doc.text(`E-mail: ${email}`, 10, 5 * row)
+            row += 1
+        }
+        if (phone) {
+            doc.text(`Phone: ${phone}`, 10, 5 * row)
+            row += 1
+        }
+        if (telegram) {
+            doc.text(`Telegram: `, 10, 5 * row)
+            doc.textWithLink(telegram, 25, 5 * row, { url: `"https://${telegram}"` })
+            row += 1
+        }
+    }
+    if (experience) {
+        experience += 2
+        row = 4
+        doc.setFont('_TimesNewRomanBold');
+        doc.setFontSize(13)
+        doc.text(`Обо мне:`, 10, 10 * row)
+        row += 1
+        doc.setFont('_TimesNewRoman');
+        doc.setFontSize(9)
+        doc.text(`${area} разработчик с ${experience} годами опыта.`, 10, 9 * row)
+    }
+    /* составляем карту навыков */
+    var skills = skillsDict[area].join(', ')
+    skills = `${lang}, ${framework}, ${skills}`
+    doc.setFont('_TimesNewRomanBold');
+    doc.setFontSize(13)
+    row += 1
+    doc.text(`Навыки: `, 10, 10 * row)
+    row += 1
+    doc.setFont('_TimesNewRoman');
+    doc.setFontSize(9)
+    doc.text(skills, 10, 9.5 * row)
 
     var pdfData = doc.output('datauristring');
     var iframe = `<iframe id="pdf-view" width='100%' height='${height}px' src='${pdfData}'></iframe>`;
