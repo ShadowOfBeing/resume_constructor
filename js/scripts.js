@@ -15,6 +15,13 @@ skillsDict = {
     'Unreal Engine': ['Unreal Engine', 'Git'],
 }
 
+companies = {
+    'gamedev': ['Mundfish', 'Wargaming', 'Gaijin Entertainment', 'Mail.Ru Games', 'Nival', 'GSC Game World',
+                'Battlestate Games'],
+    'other': ['Совкомбанк Технологии', 'Авито Tech', 'Sber Devices', 'VK', 'Яндекс', 'Ozon Tech', 'Тинькофф Технологии'],
+    'infosecurity': ['Лаборатория Касперского', 'Positive Technologies', 'Group-IB', 'InfoWatch Group'],
+}
+
 function start() {
     let pdfViewer = document.getElementById('pdf-viewer');
     const height = window.innerHeight * 0.93;
@@ -32,7 +39,6 @@ function addInfo() {
     let pdfViewer = document.getElementById('pdf-viewer');
     const height = window.innerHeight * 0.93;
     const { jsPDF } = window.jspdf;
-    // Default export is a4 paper, portrait, using millimeters for units
     var doc = new jsPDF();
     doc.addFont('../fonts/times.ttf', '_TimesNewRoman', 'normal');
     doc.addFont('../fonts/timesbd.ttf', '_TimesNewRomanBold', 'normal');
@@ -94,16 +100,45 @@ function addInfo() {
     doc.setFont('_TimesNewRomanBold');
     doc.setFontSize(13)
     row += 1
-    doc.text(`Навыки: `, 10, 10 * row)
-    row += 1
+    doc.text(`Навыки: `, 10, 10 * row++)
     doc.setFont('_TimesNewRoman');
     doc.setFontSize(9)
-    doc.text(skills, 10, 9.5 * row)
+    doc.text(skills, 10, 9.5 * row++)
     /* предыдущие места работы */
-    row += 1
+    workplaces = getWorkplaces(area)
+    workDates = getDateRanges(experience)
     doc.setFont('_TimesNewRomanBold');
     doc.setFontSize(13)
-    doc.text(`Опыт работы: `, 10, 10 * row)
+    doc.text(`Опыт работы: `, 10, 10 * row++)
+
+    doc.setFontSize(13)
+    doc.text(workplaces[0], 10, 10 * row++)
+    doc.setFontSize(9)
+    doc.text(workDates[1], 10, 9.7 * row)
+    row += 0.5
+    doc.text(`Обязанности: `, 10, 9.7 * row)
+    doc.setFont('_TimesNewRoman');
+    doc.text(`красил кнопки`, 32, 9.7 * row)
+    row += 0.5
+    doc.setFont('_TimesNewRomanBold');
+    doc.text(`Достижения: `, 10, 9.7 * row)
+    doc.setFont('_TimesNewRoman');
+    doc.text(`закрасил все ёбаные кнопки`, 32, 9.7 * row++)
+
+    doc.setFont('_TimesNewRomanBold');
+    doc.setFontSize(13)
+    doc.text(workplaces[1], 10, 10 * row++)
+    doc.setFontSize(9)
+    doc.text(workDates[0], 10, 9.7 * row)
+    row += 0.5
+    doc.text(`Обязанности: `, 10, 9.7 * row)
+    doc.setFont('_TimesNewRoman');
+    doc.text(`перекладывал джейсоны`, 32, 9.7 * row)
+    row += 0.5
+    doc.setFont('_TimesNewRomanBold');
+    doc.text(`Достижения: `, 10, 9.7 * row)
+    doc.setFont('_TimesNewRoman');
+    doc.text(`кто такой этот ваш Джейсон, которого все перекладывают?`, 32, 9.7 * row++)
 
     var pdfData = doc.output('datauristring');
     var iframe = `<iframe id="pdf-view" width='100%' height='${height}px' src='${pdfData}'></iframe>`;
@@ -111,82 +146,30 @@ function addInfo() {
     //doc.save("a4.pdf");
 }
 
+function getWorkplaces(area) {
+    var companyArray
+    if (['Unreal Engine', 'Unity'].includes(area)) {
+        companyArray = companies['gamedev']
+    } else if (area == 'infosecurity') {
+        companyArray = companies[area]
+    } else {
+        companyArray = companies['other']
+    }
+
+    let randomIndex1, randomIndex2
+
+    // генерируем два случайных неповторяющихся индекса
+    do {
+      randomIndex1 = Math.floor(Math.random() * companyArray.length)
+      randomIndex2 = Math.floor(Math.random() * companyArray.length)
+    } while (randomIndex1 === randomIndex2)
+
+    return [companyArray[randomIndex1], companyArray[randomIndex2]]
+}
+
 function getLayout(category) {
     // сохраняем категорию в объекте sessionStorage браузера
     sessionStorage.setItem("category", category)
     // открываем страницу шаблона
     window.location.href = window.location.href.replace("index.html", "layout.html").replace("index", "layout")
-}
-
-//class MyVariables {
-//  constructor() {
-//    // ежемесячные расходы
-//    this.monthlyExpenses = 0;
-//    // сумма роста ежемесячных расходов
-//    this.monthlyExpensesRise = 0;
-//    // период роста ежемесячных расходов
-//    this.monthlyExpensesRisePeriod = 0;
-//    // размер зарплаты
-//    this.salary = 0;
-//    // стаж работы
-//    this.salaryMonth = 0;
-//    // период роста зарплаты
-//    this.risePeriod = 0;
-//    // сумма роста зарплаты
-//    this.riseAmount = 0;
-//    // сумма НДФЛ
-//    this.salaryTax = 0;
-//    // процент накопительного вклада
-//    this.accumulativeInterest = 0
-//    // накопления
-//    this.accumulation = 0;
-//    // налоговый вычет за кредит
-//    this.creditTaxDeduction = 0;
-//    // налоговый вычет за проценты
-//    this.percentsTaxDeduction = 0;
-//    // цена квартиры
-//    this.apartmentPrice = 0;
-//    // первоначальный взнос за ипотеку (по умолчанию равен моей доле от продажи квартиры)
-//    this.mortgageDownPayment = 0;
-//    // сумма ипотеки
-//    this.mortgage = 0;
-//    // период досрочного погашения ипотеки
-//    this.prepaymentPeriod = 12;
-//    // процент ипотеки
-//    this.mortgagePercent = 0;
-//    // сумма выплаченного тела кредита за год
-//    this.creditFromYear = 0;
-//    // сумма выплаченных процентов за год
-//    this.percentsFromYear = 0;
-//  }
-//
-//    reset() {
-//        for (const item in this) {
-//            if (this.hasOwnProperty(item)) {
-//                this[item] = 0
-//            }
-//        }
-//        this.prepaymentPeriod = 12
-//    }
-//}
-
-
-function viewResult() {
-    document.getElementById('mortgage-table').innerHTML = ''
-    myVars.apartmentPrice = parseInt(document.getElementById('apartment-price').value)
-    myVars.mortgagePercent = parseInt(document.getElementById('mortgage-percent').value)
-    myVars.monthlyExpenses = parseInt(document.getElementById('monthly-expenses').value)
-    myVars.monthlyExpensesRise = parseInt(document.getElementById('monthly-expenses-rise').value)
-    myVars.monthlyExpensesRisePeriod = parseInt(document.getElementById('monthly-expenses-rise-period').value)
-    myVars.salary = parseInt(document.getElementById('salary').value)
-    myVars.risePeriod = parseInt(document.getElementById('rise-period').value)
-    myVars.riseAmount = parseInt(document.getElementById('rise-amount').value)
-    myVars.accumulativeInterest = parseInt(document.getElementById('accumulative-interest').value) / 100
-    // myVars.accumulation = parseInt(document.getElementById('accumulation').value)
-    myVars.creditTaxDeduction = parseInt(document.getElementById('credit-tax-deduction').value)
-    myVars.percentsTaxDeduction = parseInt(document.getElementById('percents-tax-deduction').value)
-    myVars.mortgageDownPayment = parseInt(document.getElementById('mortgage-down-payment').value)
-    var mortgagePeriod = parseInt(document.getElementById('mortgage-period').value)
-    var annualInterestRate = parseInt(document.getElementById('mortgage-percent').value)
-    var loanAmount = myVars.apartmentPrice - myVars.mortgageDownPayment
 }
