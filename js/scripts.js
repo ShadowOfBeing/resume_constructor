@@ -18,8 +18,8 @@ skillsDict = {
 companies = {
     'gamedev': ['Mundfish', 'Wargaming', 'Gaijin Entertainment', 'Mail.Ru Games', 'Nival', 'GSC Game World',
                 'Battlestate Games'],
-    'other': ['Совкомбанк Технологии', 'Авито Tech', 'Sber Devices', 'VK', 'Яндекс', 'Ozon Tech', 'Тинькофф Технологии'],
     'infosecurity': ['Лаборатория Касперского', 'Positive Technologies', 'Group-IB', 'InfoWatch Group'],
+    'other': ['Совкомбанк Технологии', 'Авито Tech', 'Sber Devices', 'VK', 'Яндекс', 'Ozon Tech', 'Тинькофф Технологии'],
 }
 
 function start() {
@@ -55,7 +55,14 @@ function addInfo() {
     var phone = document.getElementById('phone').value
     var telegram = document.getElementById('telegram').value
     /* о себе */
-    var experience = parseFloat(document.getElementById('experience').value)
+    var experience = parseFloat(document.getElementById('experience').value.replace(',', '.'))
+    /* предыдущие места работы */
+    var work1 = document.getElementById('company-1').value
+    var work2 = document.getElementById('company-2').value
+    var workplaces = getWorkplaces(area)
+    if (!work1) { work1 = workplaces[0] }
+    if (!work2) { work2 = workplaces[1] }
+    var workDates = getDateRanges(experience)
 
     if (firstName && lastName) {
         row = 1
@@ -105,14 +112,12 @@ function addInfo() {
     doc.setFontSize(9)
     doc.text(skills, 10, 9.5 * row++)
     /* предыдущие места работы */
-    workplaces = getWorkplaces(area)
-    workDates = getDateRanges(experience)
     doc.setFont('_TimesNewRomanBold');
     doc.setFontSize(13)
     doc.text(`Опыт работы: `, 10, 10 * row++)
 
     doc.setFontSize(13)
-    doc.text(workplaces[0], 10, 10 * row++)
+    doc.text(work1, 10, 10 * row++)
     doc.setFontSize(9)
     doc.text(workDates[1], 10, 9.7 * row)
     row += 0.5
@@ -127,7 +132,7 @@ function addInfo() {
 
     doc.setFont('_TimesNewRomanBold');
     doc.setFontSize(13)
-    doc.text(workplaces[1], 10, 10 * row++)
+    doc.text(work2, 10, 10 * row++)
     doc.setFontSize(9)
     doc.text(workDates[0], 10, 9.7 * row)
     row += 0.5
