@@ -39,11 +39,16 @@ function addInfo() {
     let pdfViewer = document.getElementById('pdf-viewer');
     const height = window.innerHeight * 0.93;
     const { jsPDF } = window.jspdf;
+
     var doc = new jsPDF();
-    doc.addFont('../fonts/times.ttf', '_TimesNewRoman', 'normal');
-    doc.addFont('../fonts/timesbd.ttf', '_TimesNewRomanBold', 'normal');
-    // установка шрифта для всего документа
-    //doc.setFont('_TimesNewRoman');
+
+    // Добавление шрифта
+    doc.addFileToVFS('font1.ttf', font1);
+    doc.addFileToVFS('font2.ttf', font2);
+    doc.addFont('font1.ttf', '_TimesNewRoman', 'normal');
+    doc.addFont('font2.ttf', '_TimesNewRomanBold', 'normal');
+    //doc.addFont(customFont1.fontData, '_TimesNewRoman', '', 'normal');
+    //doc.addFont(customFont2.fontData, '_TimesNewRomanBold', '', 'normal');
     /* название резюме */
     var firstName = document.getElementById('first-name').value
     var lastName = document.getElementById('last-name').value
@@ -85,8 +90,8 @@ function addInfo() {
             row += 1
         }
         if (telegram) {
-            doc.text(`Telegram: `, 10, 5 * row)
-            doc.textWithLink(telegram, 25, 5 * row, { url: `"https://${telegram}"` })
+            doc.text(`Telegram: ${telegram}`, 10, 5 * row)
+            //doc.textWithLink(telegram, 25, 5 * row, { url: `"https://${telegram}"` })
             row += 1
         }
     }
