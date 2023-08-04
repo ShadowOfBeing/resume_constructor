@@ -35,6 +35,8 @@ function start() {
 
 function addInfo() {
     var row = 1
+    var fontSize1 = 11
+    var fontSize2 = 15
     // Получение элемента контейнера для отображения PDF
     let pdfViewer = document.getElementById('pdf-viewer');
     const height = window.innerHeight * 0.93;
@@ -72,13 +74,13 @@ function addInfo() {
     if (firstName && lastName) {
         row = 1
         doc.setFont('_TimesNewRomanBold');
-        doc.setFontSize(13)
+        doc.setFontSize(fontSize2)
 
         doc.text(`${lastName} ${firstName}, ${lang} ${area} Developer`, 10, 10 * row)
     }
     if (email || telegram || phone) {
         doc.setFont('_TimesNewRoman');
-        doc.setFontSize(9)
+        doc.setFontSize(fontSize1)
 
         row = 3
         if (email) {
@@ -99,56 +101,56 @@ function addInfo() {
         experience += 2
         row = 4
         doc.setFont('_TimesNewRomanBold');
-        doc.setFontSize(13)
+        doc.setFontSize(fontSize2)
         doc.text(`Обо мне:`, 10, 10 * row)
         row += 1
         doc.setFont('_TimesNewRoman');
-        doc.setFontSize(9)
+        doc.setFontSize(fontSize1)
         doc.text(`${area} разработчик с ${experience} годами опыта.`, 10, 9 * row)
     }
     /* составляем карту навыков */
     var skills = skillsDict[area].join(', ')
     skills = `${lang}, ${framework}, ${skills}`
     doc.setFont('_TimesNewRomanBold');
-    doc.setFontSize(13)
+    doc.setFontSize(fontSize2)
     row += 1
     doc.text(`Навыки: `, 10, 10 * row++)
     doc.setFont('_TimesNewRoman');
-    doc.setFontSize(9)
+    doc.setFontSize(fontSize1)
     doc.text(skills, 10, 9.5 * row++)
     /* предыдущие места работы */
     doc.setFont('_TimesNewRomanBold');
-    doc.setFontSize(13)
+    doc.setFontSize(fontSize2)
     doc.text(`Опыт работы: `, 10, 10 * row++)
 
-    doc.setFontSize(13)
-    doc.text(work1, 10, 10 * row++)
-    doc.setFontSize(9)
+    doc.setFontSize(fontSize2)
+    doc.text(`${lang} ${area} Developer в ${work1}`, 10, 10 * row++)
+    doc.setFontSize(fontSize1)
     doc.text(workDates[1], 10, 9.7 * row)
     row += 0.5
     doc.text(`Обязанности: `, 10, 9.7 * row)
     doc.setFont('_TimesNewRoman');
-    doc.text(`красил кнопки`, 32, 9.7 * row)
+    doc.text(`красил кнопки`, 36, 9.7 * row)
     row += 0.5
     doc.setFont('_TimesNewRomanBold');
     doc.text(`Достижения: `, 10, 9.7 * row)
     doc.setFont('_TimesNewRoman');
-    doc.text(`закрасил все ёбаные кнопки`, 32, 9.7 * row++)
+    doc.text(`закрасил все ёбаные кнопки`, 36, 9.7 * row++)
 
     doc.setFont('_TimesNewRomanBold');
-    doc.setFontSize(13)
-    doc.text(work2, 10, 10 * row++)
-    doc.setFontSize(9)
+    doc.setFontSize(fontSize2)
+    doc.text(`${lang} ${area} Developer в ${work2}`, 10, 10 * row++)
+    doc.setFontSize(fontSize1)
     doc.text(workDates[0], 10, 9.7 * row)
     row += 0.5
     doc.text(`Обязанности: `, 10, 9.7 * row)
     doc.setFont('_TimesNewRoman');
-    doc.text(`перекладывал джейсоны`, 32, 9.7 * row)
+    doc.text(`перекладывал джейсоны`, 36, 9.7 * row)
     row += 0.5
     doc.setFont('_TimesNewRomanBold');
     doc.text(`Достижения: `, 10, 9.7 * row)
     doc.setFont('_TimesNewRoman');
-    doc.text(`кто такой этот ваш Джейсон, которого все перекладывают?`, 32, 9.7 * row++)
+    doc.text(`кто такой этот ваш Джейсон, которого все перекладывают?`, 36, 9.7 * row++)
 
     var pdfData = doc.output('datauristring');
     var iframe = `<iframe id="pdf-view" width='100%' height='${height}px' src='${pdfData}'></iframe>`;
