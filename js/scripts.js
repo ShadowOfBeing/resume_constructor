@@ -85,8 +85,8 @@ function addInfo() {
             row += 1
         }
         if (telegram) {
-            doc.text(`Telegram: `, 10, 5 * row)
-            doc.textWithLink(telegram, 25, 5 * row, { url: `"https://${telegram}"` })
+            doc.text(`Telegram: ${telegram}`, 10, 5 * row)
+            //doc.textWithLink(telegram, 25, 5 * row, { url: `"https://${telegram}"` })
             row += 1
         }
     }
