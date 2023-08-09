@@ -19,7 +19,8 @@ companies = {
     'gamedev': ['Mundfish', 'Wargaming', 'Gaijin Entertainment', 'Mail.Ru Games', 'Nival', 'GSC Game World',
                 'Battlestate Games'],
     'infosecurity': ['Лаборатория Касперского', 'Positive Technologies', 'Group-IB', 'InfoWatch Group'],
-    'other': ['Совкомбанк Технологии', 'Авито Tech', 'Sber Devices', 'VK', 'Яндекс', 'Ozon Tech', 'Тинькофф Технологии'],
+    'other': ['Совкомбанк Технологии', 'Avito Tech', 'Sber Devices', 'VK', 'Яндекс', 'Ozon Tech', 'Тинькофф Технологии',
+              'Lamoda Tech', 'Авиасейлс', 'Raiffeisen DGTL', 'Циан'],
 }
 
 function start() {
